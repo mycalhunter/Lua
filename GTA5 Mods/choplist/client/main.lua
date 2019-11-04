@@ -1,3 +1,4 @@
+-- client-side chopshop job
 Citizen.CreateThread(function()
 info = AddBlipForCoord(-93.28, 19.40, 71.48)
 SetBlipSprite(info, 66)
