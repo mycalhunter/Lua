@@ -27,7 +27,7 @@ $(document).ready(function() {
 $(function() {
   function display(bool) {
     if (bool) {
-      $("#container").show();
+      $("#container").fadeIn("slow");
     } else {
       $("#container").hide();
     }

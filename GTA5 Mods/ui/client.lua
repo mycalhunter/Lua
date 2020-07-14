@@ -31,14 +31,7 @@ function drawText(x, y, z, text, sc)
 end
 
 function chat(str, color)
-  TriggerEvent(
-    'chat:addMessage',
-    {
-      color = color,
-      multiline = true,
-      args = {str}
-    }
-  )
+  TriggerEvent('chat:addMessage', { color = color, multiline = true, args = {str} })
 end
 
 function marker(type, x, y, z, r, g, b, a)
@@ -68,5 +61,4 @@ function marker(type, x, y, z, r, g, b, a)
     0, -- textureName
     0 -- drawOnEnts
   )
-
 end

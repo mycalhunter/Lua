@@ -15,11 +15,17 @@ Citizen.CreateThread(function()
   local palm_lib = "anim@mp_player_intupperface_palm" --face palm with idle_a
   local fob_lib = "anim@mp_player_intmenu@key_fob@" --face palm with fob_click
   local cpr_lib = "missheistfbi3b_ig8_2" --paramedic cpr with cpr_loop_paramedic
+  local thinking_lib = "misscarsteal4@aliens"
+  
+  --{command = "thinking", hash = "", entry = "misscarsteal4@aliens", anim = "rehearsal_base_idle_director", flags = 49, desc = "Thinking", cat = "General"},
+  
+  
   RequestAnimDict(crossedarms_lib)
   RequestAnimDict(palm_lib)
   RequestAnimDict(fob_lib)
   RequestAnimDict(cpr_lib)
-  while not HasAnimDictLoaded(crossedarms_lib, palm_lib, fob_lib, cpr_lib) do
+  RequestAnimDict(thinking_lib)
+  while not HasAnimDictLoaded(crossedarms_lib, palm_lib, fob_lib, cpr_lib, thinking_lib) do
     Citizen.Wait(100)
   end
   local handsup = false
@@ -71,6 +77,19 @@ Citizen.CreateThread(function()
     if IsControlJustPressed(1, Keys["B"]) and IsControlPressed(1, Keys["LEFTSHIFT"]) then --Start holding g
       if not handsup then
         TaskPlayAnim(GetPlayerPed(-1), cpr_lib, "cpr_loop_paramedic", 1.0, - 1.0, 11000, 0, 1, true, true, true) --TASK_PLAY_ANIM(Ped ped, char* animDictionary, char* animationName, float speed, float speedMultiplier, int duration, int flag, float playbackRate, BOOL lockX, BOOL lockY, BOOL lockZ);
+        handsup = true
+      else
+        handsup = false
+        ClearPedTasks(GetPlayerPed(-1))
+      end
+    end
+    
+    
+    -- Thinking Emote
+    -- Starts face palm emote when "H" is pressed, will remain in emote until H is pressed again
+    if IsControlJustPressed(1, Keys["H"]) then --Start holding g
+      if not handsup then
+        TaskPlayAnim(GetPlayerPed(-1), thinking_lib, "rehearsal_base_idle_director", 8.0, 8.0, - 1, 50, 0, false, false, false) --TASK_PLAY_ANIM(Ped ped, char* animDictionary, char* animationName, float speed, float speedMultiplier, int duration, int flag, float playbackRate, BOOL lockX, BOOL lockY, BOOL lockZ);
         handsup = true
       else
         handsup = false
